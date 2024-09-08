@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./src/output.css">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-2xl p-6 bg-white shadow-lg rounded-lg relative z-10">
+        <h1 class="text-2xl font-semibold mb-6 text-center">Gradient Picker</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+            <div>
+                <label for="color1" class="block text-sm font-medium text-gray-700">Color 1:</label>
+                <input type="color" id="color1" value="#ff0000" class="w-full h-10 mt-1 rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label for="color2" class="block text-sm font-medium text-gray-700">Color 2:</label>
+                <input type="color" id="color2" value="#0000ff" class="w-full h-10 mt-1 rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+            </div>
+
+            <div class="md:col-span-2">
+                <label for="direction" class="block text-sm font-medium text-gray-700">Direction:</label>
+                <select id="direction" class="w-full mt-1 p-2 rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                    <option value="to right">To Right</option>
+                    <option value="to left">To Left</option>
+                    <option value="to top">To Top</option>
+                    <option value="to bottom">To Bottom</option>
+                    <option value="to top right">To Top Right</option>
+                    <option value="to top left">To Top Left</option>
+                    <option value="to bottom right">To Bottom Right</option>
+                    <option value="to bottom left">To Bottom Left</option>
+                </select>
+            </div>
+        </div>
+        
+    
+        <div id="css-output" class="mt-4 p-4 bg-gray-50 rounded-md">
+            <p class="text-sm font-semibold text-gray-800">CSS Output:</p>
+            <code id="gradient-css" class="block mt-2 p-2 bg-white rounded-md border border-gray-300 text-xs"></code>
+        </div>
+    </div>
+
+    <script>
+        
+        const color1 = document.getElementById('color1');
+        const color2 = document.getElementById('color2');
+        const direction = document.getElementById('direction');
+        const gradientCss = document.getElementById('gradient-css');
+
+        
+        function generateGradient() {
+            const gradient = `linear-gradient(${direction.value}, ${color1.value}, ${color2.value})`;
+            document.body.style.background = gradient;
+            gradientCss.textContent = `background: ${gradient};`;
+        }
+
+        
+        color1.addEventListener('change', generateGradient);
+        color2.addEventListener('change', generateGradient);
+        direction.addEventListener('change', generateGradient);
+
+
+        generateGradient();
+    </script>
+</body>
+</html>
